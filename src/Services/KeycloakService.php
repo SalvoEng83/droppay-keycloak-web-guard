@@ -187,8 +187,9 @@ class KeycloakService
         $token = [];
 
         try {
-            $response = $this->httpClient->request('POST', $url, ['form_params' => $params]);
-
+            //$response = $this->httpClient->request('POST', $url, ['form_params' => $params]); //chiamata originale
+            $response = $this->httpClient->request('POST', $url, ['form_params' => $params, 'verify' => false]); //chiamata modificata
+            
             if ($response->getStatusCode() === 200) {
                 $token = $response->getBody()->getContents();
                 $token = json_decode($token, true);
@@ -227,7 +228,8 @@ class KeycloakService
         $token = [];
 
         try {
-            $response = $this->httpClient->request('POST', $url, ['form_params' => $params]);
+            //$response = $this->httpClient->request('POST', $url, ['form_params' => $params]); //chiamata originale
+            $response = $this->httpClient->request('POST', $url, ['form_params' => $params, 'verify' => false]); //chiamata modificata
 
             if ($response->getStatusCode() === 200) {
                 $token = $response->getBody()->getContents();
@@ -259,7 +261,8 @@ class KeycloakService
         }
 
         try {
-            $response = $this->httpClient->request('POST', $url, ['form_params' => $params]);
+            //$response = $this->httpClient->request('POST', $url, ['form_params' => $params]); //chiamata originale
+            $response = $this->httpClient->request('POST', $url, ['form_params' => $params, 'verify' => false]); //chiamata modificata
             return $response->getStatusCode() === 204;
         } catch (GuzzleException $e) {
             $this->logException($e);
@@ -291,8 +294,9 @@ class KeycloakService
         $user = [];
 
         try {
-            $response = $this->httpClient->request('GET', $url, ['headers' => $headers]);
-
+            //$response = $this->httpClient->request('GET', $url, ['headers' => $headers]); //chiamata originale
+            $response = $this->httpClient->request('GET', $url, ['headers' => $headers, 'verify' => false]); //chiamata modificata
+            
             if ($response->getStatusCode() === 200) {
                 $user = $response->getBody()->getContents();
                 $user = json_decode($user, true);
@@ -444,7 +448,8 @@ class KeycloakService
         $configuration = [];
 
         try {
-            $response = $this->httpClient->request('GET', $url);
+            //$response = $this->httpClient->request('GET', $url); //chiamata originale
+            $response = $this->httpClient->request('GET', $url, ['verify' => false]); //chiamata modificata
 
             if ($response->getStatusCode() === 200) {
                 $configuration = $response->getBody()->getContents();
